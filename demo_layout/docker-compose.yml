@@ -12,7 +12,7 @@
 
 discovery:
   mem_limit: 1000000000
-  image: yingzhuo/microservice-discovery:latest
+  image: syuukawa/microservice-discovery:latest
   ports:
     - 8761:8761
   volumes:
@@ -21,101 +21,101 @@ discovery:
     - SPRING_PROFILES_ACTIVE=docker,security
     - JAVA_OPTS="-Xms5000m -Xmx10000m"
   command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
-
-config-service:
-    mem_limit: 1000000000
-    image: yingzhuo/microservice-config-service:latest
-    ports:
-      - 8888:8888
-    volumes:
-      - /tmp:/tmp
-      - /home/yingzhuo/projects/spring-cloud-microservice-example/config-repo:/root/spring-cloud-microservice-example-config-repo
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker,native
-      - JAVA_OPTS="-Xms5000m -Xmx10000m"
-    links:
-      - discovery
-    command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
-
-drama-service-a:
-  mem_limit: 1000000000
-  image: yingzhuo/microservice-drama-service:latest
-  ports:
-    - 7779:7779
-  volumes:
-    - /tmp:/tmp
-  environment:
-    - SPRING_PROFILES_ACTIVE=docker,security
-    - SERVER_PORT=7779
-    - JAVA_OPTS="-Xms5000m -Xmx10000m"
-  links:
-    - discovery
-    - config-service
-  entrypoint: dockerize -wait tcp://discovery:8761 -timeout 3600s
-  entrypoint: dockerize -wait tcp://config-service:8888 -timeout 3600s
-  command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
-
-drama-service-b:
-  mem_limit: 1000000000
-  image: yingzhuo/microservice-drama-service:latest
-  ports:
-    - 7780:7780
-  volumes:
-    - /tmp:/tmp
-  environment:
-    - SPRING_PROFILES_ACTIVE=docker,security
-    - SERVER_PORT=7780
-    - JAVA_OPTS="-Xms5000m -Xmx10000m"
-  links:
-    - discovery
-    - config-service
-  entrypoint: dockerize -wait tcp://discovery:8761 -timeout 3600s
-  entrypoint: dockerize -wait tcp://config-service:8888 -timeout 3600s
-  command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
-
-api-gateway:
-  mem_limit: 1000000000
-  image: yingzhuo/microservice-api-gateway:latest
-  ports:
-    - 5555:5555
-  volumes:
-    - /tmp:/tmp
-  environment:
-    - SPRING_PROFILES_ACTIVE=docker,security
-    - JAVA_OPTS="-Xms5000m -Xmx10000m"
-  links:
-    - discovery
-    - drama-service-a
-    - drama-service-b
-  command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
-
-ui:
-  mem_limit: 1000000000
-  image: yingzhuo/microservice-ui:latest
-  ports:
-    - 8866:8866
-  volumes:
-    - /tmp:/tmp
-  environment:
-    - SPRING_PROFILES_ACTIVE=docker
-    - JAVA_OPTS="-Xms5000m -Xmx10000m"
-  links:
-    - discovery
-    - api-gateway
-  entrypoint: dockerize -wait tcp://discovery:8761 -timeout 3600s
-  command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
-
-hystrix-dashboard:
-  mem_limit: 1000000000
-  image: yingzhuo/microservice-hystrix-dashboard:latest
-  ports:
-    - 8030:8030
-  volumes:
-    - /tmp:/tmp
-  environment:
-    - SPRING_PROFILES_ACTIVE=docker
-    - JAVA_OPTS="-Xms5000m -Xmx10000m"
-  links:
-    - discovery
-  entrypoint: dockerize -wait tcp://discovery:8761 -timeout 3600s
-  command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
+#
+#config-service:
+#    mem_limit: 1000000000
+#    image: yingzhuo/microservice-config-service:latest
+#    ports:
+#      - 8888:8888
+#    volumes:
+#      - /tmp:/tmp
+#      - /home/yingzhuo/projects/spring-cloud-microservice-example/config-repo:/root/spring-cloud-microservice-example-config-repo
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker,native
+#      - JAVA_OPTS="-Xms5000m -Xmx10000m"
+#    links:
+#      - discovery
+#    command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
+#
+#drama-service-a:
+#  mem_limit: 1000000000
+#  image: yingzhuo/microservice-drama-service:latest
+#  ports:
+#    - 7779:7779
+#  volumes:
+#    - /tmp:/tmp
+#  environment:
+#    - SPRING_PROFILES_ACTIVE=docker,security
+#    - SERVER_PORT=7779
+#    - JAVA_OPTS="-Xms5000m -Xmx10000m"
+#  links:
+#    - discovery
+#    - config-service
+#  entrypoint: dockerize -wait tcp://discovery:8761 -timeout 3600s
+#  entrypoint: dockerize -wait tcp://config-service:8888 -timeout 3600s
+#  command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
+#
+#drama-service-b:
+#  mem_limit: 1000000000
+#  image: yingzhuo/microservice-drama-service:latest
+#  ports:
+#    - 7780:7780
+#  volumes:
+#    - /tmp:/tmp
+#  environment:
+#    - SPRING_PROFILES_ACTIVE=docker,security
+#    - SERVER_PORT=7780
+#    - JAVA_OPTS="-Xms5000m -Xmx10000m"
+#  links:
+#    - discovery
+#    - config-service
+#  entrypoint: dockerize -wait tcp://discovery:8761 -timeout 3600s
+#  entrypoint: dockerize -wait tcp://config-service:8888 -timeout 3600s
+#  command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
+#
+#api-gateway:
+#  mem_limit: 1000000000
+#  image: yingzhuo/microservice-api-gateway:latest
+#  ports:
+#    - 5555:5555
+#  volumes:
+#    - /tmp:/tmp
+#  environment:
+#    - SPRING_PROFILES_ACTIVE=docker,security
+#    - JAVA_OPTS="-Xms5000m -Xmx10000m"
+#  links:
+#    - discovery
+#    - drama-service-a
+#    - drama-service-b
+#  command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
+#
+#ui:
+#  mem_limit: 1000000000
+#  image: yingzhuo/microservice-ui:latest
+#  ports:
+#    - 8866:8866
+#  volumes:
+#    - /tmp:/tmp
+#  environment:
+#    - SPRING_PROFILES_ACTIVE=docker
+#    - JAVA_OPTS="-Xms5000m -Xmx10000m"
+#  links:
+#    - discovery
+#    - api-gateway
+#  entrypoint: dockerize -wait tcp://discovery:8761 -timeout 3600s
+#  command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
+#
+#hystrix-dashboard:
+#  mem_limit: 1000000000
+#  image: yingzhuo/microservice-hystrix-dashboard:latest
+#  ports:
+#    - 8030:8030
+#  volumes:
+#    - /tmp:/tmp
+#  environment:
+#    - SPRING_PROFILES_ACTIVE=docker
+#    - JAVA_OPTS="-Xms5000m -Xmx10000m"
+#  links:
+#    - discovery
+#  entrypoint: dockerize -wait tcp://discovery:8761 -timeout 3600s
+#  command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"

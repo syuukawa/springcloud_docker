@@ -40,6 +40,7 @@ curl -X 'GET' -sSL 'https://raw.githubusercontent.com/yingzhuo/spring-cloud-micr
 docker-compose up -d
 ```
 
+
 如果启动成功，
 
 * 访问`http://HOST:8761/dashboard`可查看被注册的服务的详情。
