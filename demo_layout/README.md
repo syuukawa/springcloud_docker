@@ -39,7 +39,8 @@ curl -X 'GET' -sSL 'https://raw.githubusercontent.com/yingzhuo/spring-cloud-micr
 curl -X 'GET' -sSL 'https://raw.githubusercontent.com/yingzhuo/spring-cloud-microservice-example/master/docker-compose.yml' > docker-compose.yml
 docker-compose up -d
 ```
-
+curl -X 'GET' -sSL 'https://github.com/syuukawa/springcloud_docker/demo_layout/master/docker-compose.yml' > docker-compose.yml
+docker-compose up -d
 
 如果启动成功，
 

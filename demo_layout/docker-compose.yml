@@ -18,7 +18,7 @@ discovery:
   volumes:
     - /tmp:/tmp
   environment:
-    - SPRING_PROFILES_ACTIVE=docker,security
+#    - SPRING_PROFILES_ACTIVE=docker
     - JAVA_OPTS="-Xms5000m -Xmx10000m"
   command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
 #
