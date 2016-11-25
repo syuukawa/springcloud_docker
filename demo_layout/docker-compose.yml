@@ -1,10 +1,7 @@
 discovery:
   mem_limit: 1000000000
   image: syuukawa/microservice-discovery:latest
-  ports:
-    - 8761:8761
-  volumes:
-    - /tmp:/tmp
-  environment:
-    - JAVA_OPTS="-Xms5000m -Xmx10000m"
+  ports: 8761:8761
+  volumes: /tmp:/tmp
+  environment: JAVA_OPTS="-Xms5000m -Xmx10000m"
   command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
