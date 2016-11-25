@@ -21,7 +21,8 @@ discovery:
   environment:
     - JAVA_OPTS="-Xms5000m -Xmx10000m"
     #    - SPRING_PROFILES_ACTIVE=docker
-  command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
+  command:
+    bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
 #
 #config-service:
 #    mem_limit: 1000000000
