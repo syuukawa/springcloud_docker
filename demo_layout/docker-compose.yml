@@ -1,7 +1,7 @@
 discovery:
  image: syuukawa/microservice-discovery:latest
  ports:
-  - "8761:8761"
+  - 8761:8761
  volumes:
   - /tmp:/tmp
  environment:
