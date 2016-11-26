@@ -6,4 +6,4 @@ discovery:
   - /temp:/temp
  environment:
   - JAVA_OPTS="-Xms5000m -Xmx10000m"
- command: bash -c "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
+ command: bash -c "java -jar /app.jar"
